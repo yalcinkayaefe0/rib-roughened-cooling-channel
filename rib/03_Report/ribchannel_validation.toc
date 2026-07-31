@@ -1,0 +1,31 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Scope and staging}{2}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Reference Experiment}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Definitions adopted from the reference}{3}{subsection.2.1}%
+\contentsline {paragraph}{Nusselt number.}{3}{section*.3}%
+\contentsline {paragraph}{Friction factor.}{3}{section*.4}%
+\contentsline {paragraph}{Reattachment length.}{3}{section*.5}%
+\contentsline {paragraph}{Rib material.}{3}{section*.6}%
+\contentsline {section}{\numberline {3}Numerical Method}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Computational domain}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Mesh}{3}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Governing equations and turbulence model}{5}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Boundary conditions}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Convergence criteria}{7}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Consistency Checks}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Momentum balance}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Energy balance}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Near-wall resolution}{9}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Results}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Pressure loss}{10}{subsection.5.1}%
+\contentsline {paragraph}{The role of the Stage~0 run.}{10}{section*.18}%
+\contentsline {subsection}{\numberline {5.2}Drag decomposition}{11}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Heat transfer}{11}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Reattachment}{12}{subsection.5.4}%
+\contentsline {paragraph}{Definition match.}{13}{section*.22}%
+\contentsline {paragraph}{Attribution --- an elimination chain.}{13}{section*.23}%
+\contentsline {paragraph}{Finite-amplitude perturbation test.}{14}{section*.26}%
+\contentsline {paragraph}{Pre-registered hypothesis --- not confirmed.}{16}{section*.29}%
+\contentsline {section}{\numberline {6}Grid Convergence}{16}{section.6}%
+\contentsline {section}{\numberline {7}Conclusions}{17}{section.7}%
