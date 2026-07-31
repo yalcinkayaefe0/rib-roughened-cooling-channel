@@ -7,7 +7,7 @@ Reads the Fluent ASCII export of the heated floor (`bottom-wall`) and produces:
   1. The reattachment length Xr/e, from the sign change of the streamwise
      wall shear stress (linear interpolation between adjacent nodes).
   2. The local Nusselt number distribution Nu/Nu0 versus X/e.
-  3. Publication figures written directly into 03_Report/figures/.
+  3. Publication figures written directly into report/figures/.
 
 Usage
 -----
@@ -38,9 +38,9 @@ import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parent.parent
 
-CFD_CSV = ROOT / "01_Data" / "cfd" / "ribbed_bottomwall.csv"
-EXP_CSV = ROOT / "01_Data" / "experimental" / "rau_fig15_pe9_1s.csv"
-FIGDIR = ROOT / "03_Report" / "figures"
+CFD_CSV = ROOT / "data" / "cfd" / "ribbed_bottomwall.csv"
+EXP_CSV = ROOT / "data" / "experimental" / "rau_fig15_pe9_1s.csv"
+FIGDIR = ROOT / "report" / "figures"
 
 # --- geometry --------------------------------------------------------
 E_RIB = 5.0e-3       # rib height                              [m]
@@ -329,7 +329,7 @@ def main():
         "Nu": nu,
         "Nu_over_Nu0": ratio,
     })
-    out3 = ROOT / "01_Data" / "cfd" / "ribbed_bottomwall_processed.csv"
+    out3 = ROOT / "data" / "cfd" / "ribbed_bottomwall_processed.csv"
     df_out.to_csv(out3, index=False, float_format="%.6g")
     print(f"  wrote {out3}")
 

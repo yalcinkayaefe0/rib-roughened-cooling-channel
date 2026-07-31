@@ -1,27 +1,32 @@
-# Kaburgalı Soğutma Kanalı — Proje Klasörü
+# Kaburgalı Soğutma Kanalı — Proje Notları
 
 Rau ve ark. (1996), 96-GT-541 — $p/e = 9$, tek duvar kaburgalı, $Re_{D_h} = 30\,000$
 vakasının 2B periyodik CFD doğrulaması.
 
-## Klasör haritası
+> Depo geneli için bkz. kök dizindeki [README.md](../README.md). Bu dosya, projenin
+> Türkçe tutulan detaylı sonuç/karar günlüğüdür.
+
+## Klasör haritası (güncel, kök dizine göre)
 
 ```
-00_Screenshots/    ANSYS / Fluent ekran görüntüleri (ham)
-01_Data/
+data/
   cfd/             ribbed_bottomwall.csv            Fluent ASCII export (taban duvarı)
                    ribbed_bottomwall_processed.csv  script çıktısı
                    FFF_raw_fluent_export            export'un ham hâli (yedek)
-  experimental/    (boş) → rau_fig15_pe9_1s.csv buraya
-02_Scripts/        postprocess_ribbed.py
-03_Report/         ribchannel_validation.tex + figures/
-RibChannel_Gun2_Geometri_Ag.md   geometri ve ağ kararlarının gerekçeli kaydı
-rau_1996_96-GT-541.pdf           referans deney makalesi
+  experimental/    rau_fig15_pe9_1s.csv
+scripts/           postprocess_ribbed.py, mesh_independence.py, urans_perturbation.py
+report/            ribchannel_validation.tex + figures/
+docs/
+  screenshots/     ANSYS / Fluent ekran görüntüleri (ham)
+  geometry_and_mesh.md   geometri ve ağ kararlarının gerekçeli kaydı
+simulation/        ANSYS Workbench projeleri, bağımsız Fluent çalışması, çözücü çıktıları
+references/        (yerel, depoya gitmez) referans makaleler — bkz. kök README
 ```
 
-Çalıştırma:
+Çalıştırma (kök dizinden):
 ```bash
-python 02_Scripts/postprocess_ribbed.py     # pandas, matplotlib, numpy gerekir
-cd 03_Report && pdflatex ribchannel_validation.tex   # iki kez
+python scripts/postprocess_ribbed.py     # pandas, matplotlib, numpy gerekir
+cd report && pdflatex ribchannel_validation.tex   # iki kez
 ```
 
 ---
@@ -146,7 +151,7 @@ Modeller yalnızca basınç kaybında ayrışıyor (%14). Rau'nun $f/f_0$ değer
 bulununca hangisinin yakın olduğu görülecek.
 
 **k-epsilon koşusu:** 1392 iterasyon, tw-rib = 309,99 K (düz), $F_x$ = 0,09467 N.
-Veri: `01_Data/cfd/ribbed_bottomwall_kepsilon.csv`
+Veri: `data/cfd/ribbed_bottomwall_kepsilon.csv`
 
 ### 2B kısıtı hipotezini destekleyen makale alıntıları
 
@@ -191,7 +196,7 @@ değerini değiştir (bias faktörlerine **dokunma**) → Generate → Update �
 
 ## Sonra
 
-- [ ] Rau Şekil 15 dijitalleştirme → `01_Data/experimental/rau_fig15_pe9_1s.csv`
+- [ ] Rau Şekil 15 dijitalleştirme → `data/experimental/rau_fig15_pe9_1s.csv`
       (iki sütun, başlıksız: `X/e`, `Nu/Nu0`; **1s** eğrisi, 2s değil)
 - [ ] Makalenin 7–8. sayfalarından Rau'nun $f/f_0$ değeri (grafikler orada olmalı)
 - [ ] Kaba ağ koşusu (GCI'ın üçüncü seviyesi)

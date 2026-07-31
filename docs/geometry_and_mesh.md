@@ -672,7 +672,7 @@ Raporda bu şekilde konumlandırılacak. (Ahmed body'de öğrenilen ders.)
 7. Fluent kurulumu (ana dosya Bölüm 4 + bu dosya Bölüm 11)
 
 **Paralel iş (bilgisayar başında düşünmeden yapılır):**
-Şekil 15'i WebPlotDigitizer ile sayısallaştır → `01_Data/experimental/rau_fig15_pe9_1s.csv`
+Şekil 15'i WebPlotDigitizer ile sayısallaştır → `data/experimental/rau_fig15_pe9_1s.csv`
 ($p/e{=}9$, **1s** eğrisi; 2s ile karıştırma)
 
 ---

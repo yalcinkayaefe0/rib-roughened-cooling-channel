@@ -10,9 +10,9 @@ Procedure: Celik et al. (2008), J. Fluids Eng. 130(7), 078001.
 Consumes three bottom-wall ASCII exports (same format as
 ribbed_bottomwall.csv: node, x, y, temperature, x-wall-shear):
 
-    01_Data/cfd/ribbed_bottomwall_coarse.csv    ~13 500 elements
-    01_Data/cfd/ribbed_bottomwall.csv           ~27 100 elements  (medium, exists)
-    01_Data/cfd/ribbed_bottomwall_fine.csv      ~53 800 elements
+    data/cfd/ribbed_bottomwall_coarse.csv    ~13 500 elements
+    data/cfd/ribbed_bottomwall.csv           ~27 100 elements  (medium, exists)
+    data/cfd/ribbed_bottomwall_fine.csv      ~53 800 elements
 
 For each mesh it evaluates two validation metrics:
     * Xr/e            — reattachment length (tau_x sign change downstream of tau_min)
@@ -31,7 +31,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
-CFD = ROOT / "01_Data" / "cfd"
+CFD = ROOT / "data" / "cfd"
 
 # nominal element counts (fine, medium, coarse) — edit to the generated values
 ELEMENTS = dict(fine=53800, medium=27100, coarse=13500)

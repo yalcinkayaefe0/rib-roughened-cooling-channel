@@ -1,12 +1,19 @@
-# Third-party copyrighted reference papers (not redistributed)
-rib/rau_1996_96-GT-541.pdf
-rib/Numerical_sensitivity_analysis_of_3_and.pdf
-rib/Manuscript_NHT_2015_final.pdf
+# Third-party copyrighted reference papers (kept locally, not redistributed)
+references/
 
 # Local Claude Code settings (machine-specific)
 .claude/settings.local.json
-rib/.claude/settings.local.json
 
 # Python
 __pycache__/
 *.pyc
+
+# LaTeX build artifacts
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/pass1.log
+report/pass2.log
+report/p1.log
+report/p2.log

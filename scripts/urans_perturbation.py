@@ -10,11 +10,11 @@ Two runs are read:
   * unperturbed  — 500 steps advanced from the converged steady field with
                    no forcing.  Fluent closes each step in 2-3 inner
                    iterations and every monitor is bit-for-bit constant.
-                   Files at the project root.
+                   Files in simulation/results/.
   * perturbed    — the same 500 steps, restarted from the same field after
                    a region patch of v = 2 m/s over
                    x = 18..28 mm, y = 4..8 mm (X/e = 0.1..2.1, Y/e = 0.8..1.6).
-                   Files in Fluent/.
+                   Files in simulation/fluent_standalone/.
 
 Monitors (identical in both runs):
     y-vel-probe   y-velocity at (x, y) = (0.024, 0.006) m  ->  X/e = 1.3, Y/e = 1.2
@@ -22,8 +22,8 @@ Monitors (identical in both runs):
     tw-bottom     area-weighted mean T on bottom-wall      [K]
     tw-rib        area-weighted mean T on rib-wall         [K]
 
-Outputs: 03_Report/figures/fig_urans_steady.pdf     (unperturbed run)
-         03_Report/figures/fig_urans_perturbed.pdf  (perturbation test)
+Outputs: report/figures/fig_urans_steady.pdf     (unperturbed run)
+         report/figures/fig_urans_perturbed.pdf  (perturbation test)
 
 Usage:   python urans_perturbation.py
 """
@@ -40,10 +40,10 @@ import matplotlib.pyplot as plt
 # =====================================================================
 
 ROOT = Path(__file__).resolve().parent.parent
-FIGDIR = ROOT / "03_Report" / "figures"
+FIGDIR = ROOT / "report" / "figures"
 
-UNPERT_DIR = ROOT              # 500 steps, no forcing
-PERT_DIR = ROOT / "Fluent"     # 500 steps, restarted after the patch
+UNPERT_DIR = ROOT / "simulation" / "results"            # 500 steps, no forcing
+PERT_DIR = ROOT / "simulation" / "fluent_standalone"    # 500 steps, restarted after the patch
 
 DT = 2.0e-5                    # time step                      [s]
 U_BULK = 9.10                  # bulk velocity                  [m/s]
