@@ -33,19 +33,19 @@ trends, but:
 - **under-predicts peak Nusselt enhancement by ~40%**
 - **under-predicts friction enhancement by ~53%**
 
-Four candidate causes were eliminated systematically:
+The cause was isolated by systematic elimination:
 
 | Candidate cause | Status | Evidence |
 |---|---|---|
-| Measurement-definition mismatch | ruled out | Matching Rau's exact probe location still gives $X_r/e \approx 8.0$ |
-| Turbulence-model choice | ruled out | $k$–$\omega$ SST and realizable $k$–$\varepsilon$ agree on $X_r/e$ within 0.5% |
+| Measurement-definition mismatch | ruled out | Matching Rau's exact LDV probe location, the reverse flow persists to the end of the floor |
+| Unsteadiness (steady-state assumption) | ruled out | Finite-amplitude perturbation test (URANS): the disturbance decays, monitors return to the same steady state |
 | Mesh resolution | ruled out | GCI (Celik et al. 2008) on 3 grids: $\mathrm{GCI}_{fine} \approx 0.001\%$ ($X_r/e$), $0.7\%$ ($Nu/Nu_0$) |
-| Unsteadiness (steady-state assumption) | ruled out | Finite-amplitude perturbation test: monitors return to the same steady state |
-| **2D idealization** | **remaining candidate** | Literature (Keshmiri 2012) shows 2D vs. 3D reattachment length diverges strongly at this $p/e$; the 2D domain cannot represent the turbulence-driven secondary (Prandtl second-kind) flows that shorten the bubble in the real 3D duct |
+| **Turbulence closure ($k$–$\omega$ SST shear-stress limiter)** | **governing cause** | Realizable $k$–$\varepsilon$ agrees with SST within 0.5% and a Stress-Omega RSM also fails to reattach, but Keshmiri et al. (2016) solved the identical 2D case and found that $v^2$–$f$ and $\varphi$–$f$ recover reattachment while SST alone does not, attributing this to the SST shear-stress limiter suppressing $\mu_t$ in the inter-rib cavity |
+| 2D idealization | secondary contribution | Cannot represent the turbulence-driven secondary flows; but since 2D computations with other closures reproduce the data, it is not the governing cause (see also Keshmiri 2012) |
 
 Full derivation, the correlation-normalization pitfalls found along the way,
-and the next-step plan (fine 3D re-run vs. documenting the 2D limit as the
-final result) are in [`docs/project_notes.md`](docs/project_notes.md)
+and the next steps (a direct test of the SST limiter coefficient and a 3D
+re-run to quantify the secondary-flow contribution) are in [`docs/project_notes.md`](docs/project_notes.md)
 (Turkish) and in the report itself.
 
 ## Repository structure
@@ -93,6 +93,10 @@ next to their matching `_files/` folder.
 - G. Rau, M. Çakan, D. Moeller, T. Arts, *The Effect of Periodic Ribs on the
   Local Aerodynamic and Heat Transfer Performance of a Straight Cooling
   Channel*, ASME Paper 96-GT-541, 1996.
+- A. Keshmiri, K. Osman, S. Benhamadouche, N. Shokri, *Assessment of
+  Advanced RANS Models against Large Eddy Simulation and Experimental Data in
+  the Investigation of Ribbed Passages with Passive Heat Transfer*, Numerical
+  Heat Transfer, Part B, 69(2), 96–110, 2016.
 - A. Keshmiri, *Numerical sensitivity analysis of 3- and 2-dimensional
   rib-roughened channels*, Heat and Mass Transfer, 2012.
   [doi:10.1007/s00231-012-0968-z](https://doi.org/10.1007/s00231-012-0968-z)

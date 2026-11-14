@@ -66,16 +66,21 @@ $k$--$\omega$~SST model, with the near-wall region resolved directly to
 $y^{+} < 1$ without wall functions. The predicted pressure loss and heat
 transfer distributions are compared against the experimental data of Rau
 et al.~\cite{rau1996}. The model reproduces the flow topology and the
-qualitative trends but over-predicts the reattachment length by roughly a
-factor of two ($\Xr/e \approx 8$ against an experimental $4.0$--$4.25$), and
+qualitative trends, but the separation bubble fails to reattach within the
+pitch at all ($\Xr/e = 7.95$ by wall shear, and no closure under Rau's own
+LDV definition, against an experimental $4.0$--$4.25$), and
 correspondingly under-predicts both the peak Nusselt enhancement
 ($\sim\!\SI{40}{\percent}$) and the friction enhancement
-($\sim\!\SI{53}{\percent}$). By systematic elimination --- of the
-measurement definition, the turbulence closure, the steady-state
-assumption and the mesh resolution --- these deviations are attributed
-to the two-dimensional
-idealisation, which omits the turbulence-driven secondary flows that shorten
-the separation bubble in the real channel. Throughout, the rib is treated as
+($\sim\!\SI{53}{\percent}$). The measurement definition, the steady-state
+assumption and the mesh resolution are each eliminated as causes by
+systematic testing, establishing the deviation as a property of the model
+rather than of its numerical solution. It is attributed to the
+$k$--$\omega$~SST closure specifically: in the identical configuration,
+computations in the literature find that every model tested and the
+experiment exhibit a reattachment point except this one, the behaviour being
+associated with its shear-stress limiter. The two-dimensional idealisation
+contributes but is not the governing cause. Throughout,
+the rib is treated as
 an adiabatic boundary removed from the fluid domain, reproducing the
 non-conducting (plexiglass) ribs of the reference experiment.
 \end{abstract}
@@ -188,7 +193,12 @@ $p/e = 9,\,10,\,12$; and $4.25 < \Xr/e < 4.50$ for $p/e = 14,\,16$.
 \paragraph{Rib material.} The ribs in the experiment were machined from
 plexiglass and are therefore effectively non-conducting. The adiabatic rib
 treatment adopted in Stage~1 of the present work reproduces the
-experimental condition exactly.
+experimental condition exactly. Keshmiri et al.~\cite{keshmiri2016} computed
+this configuration under both uniform-flux and insulated rib conditions and
+found the difference to be confined to the immediate vicinity of the ribs,
+with the insulated case returning slightly higher heat transfer; the choice
+is therefore not a significant source of uncertainty for the pitch-averaged
+comparison made here.
 
 % =====================================================================
 \section{Numerical Method}
@@ -589,8 +599,12 @@ normalised value of $f/f_{0} = 1.635$ against the Blasius reference.
 
 \begin{table}[htbp]
 \centering
-\caption{Pressure loss results. Only the Blasius normalisation is
-comparable with the experiment; see the discussion below.}
+\caption{Pressure loss results. All friction factors in this table are
+evaluated with the experimental $\Dh = \SI{0.05}{\meter}$, including those
+of the smooth Stage~0 run; since $f \propto \Dh$, the Stage~0 value quoted
+in the text against its own plane-channel diameter
+($\Dh = \SI{0.1}{\meter}$) is twice the value listed here. Only the Blasius
+normalisation is comparable with the experiment; see the discussion below.}
 \label{tab:pressure}
 \begin{tabular}{lSl}
 \toprule
@@ -705,11 +719,15 @@ components carry direct information about the flow topology:
   that the shear layer separating at the leading upper corner does
   \emph{not} reattach over the $1e$ length of the rib crest.
 
-  \item The viscous component on \texttt{bottom-wall} is also negative. Along
-  the floor, the primary recirculation zone ($X/e \in [0,\,4]$) together with
-  the secondary separation upstream of the following rib
-  ($X/e \in [6.5,\,8]$) span $5.5e$, exceeding the $2.5e$ of redeveloping
-  attached boundary layer between them.
+  \item The viscous component on \texttt{bottom-wall} is also negative, and
+  in the present solution this is not a matter of one region outweighing
+  another. Apart from the $0.886e$ footprint of the corner vortex seated
+  against the rib base, the wall shear stress is negative over the whole
+  floor: the recirculation extends without interruption to the following
+  rib, so there is no stretch of redeveloping attached boundary layer to
+  contribute a positive component. This anticipates the reattachment result
+  of Section~\ref{sec:reatt}, of which the sign of this force
+  component is one of the three independent indicators.
 \end{itemize}
 
 This decomposition may be compared with the experimental split of
@@ -855,7 +873,8 @@ the definition mismatch is eliminated as a candidate cause.
 \paragraph{Attribution --- an elimination chain.}
 The discriminating question is whether the over-long bubble is an artefact
 of the numerics or a property of the model. Four candidate causes were
-examined and three eliminated:
+examined. Three are eliminated; the fourth is identified as the governing
+cause:
 
 \begin{description}
   \item[Measurement definition --- eliminated.] Re-extracted at Rau's LDV
@@ -864,13 +883,59 @@ examined and three eliminated:
   definitions agree that no reattachment occurs within the pitch, so the
   discrepancy is not an artefact of how the length is measured.
 
-  \item[Turbulence closure --- eliminated.] The case was re-run with the
-  Realizable $k$--$\varepsilon$ model on the identical mesh and boundary
-  conditions. Despite a fundamentally different eddy-viscosity formulation
-  and near-wall treatment, it returns $\Xr/e = 7.91$, within
+  \item[Turbulence closure --- identified as the governing cause.] The case
+  was re-run with the Realizable $k$--$\varepsilon$ model on the identical
+  mesh and boundary conditions, returning $\Xr/e = 7.91$, within
   \SI{0.5}{\percent} of the SST value (Table~\ref{tab:models}). Two closures
-  this dissimilar agreeing so closely indicates that the deviation does not
-  originate in the turbulence model.
+  agreeing this closely might be taken to exonerate the closure, but the
+  comparison is not decisive on its own: it bounds the difference between
+  two particular two-equation models and nothing more.
+
+  The decisive evidence is an independent computation of the identical
+  configuration. Keshmiri et al.~\cite{keshmiri2016} solved the same 2D case
+  ($p/e = 9$, $e/\Dh = 0.1$, $\Rey = 30\,000$, one ribbed wall) with
+  $k$--$\omega$~SST, $v^{2}$--$f$, $\varphi$--$f$, an elliptic-blending
+  Reynolds-stress model and a wall-resolved LES. Two of their findings bear
+  directly on the present result. First, at $y/e = 0.1$ every model and the
+  experiment exhibit a reattachment point except $k$--$\omega$~SST, for
+  which the flow remains reversed across the cavity --- the behaviour found
+  here. Second, all models return a longer bubble than the measurement, but
+  $k$--$\omega$~SST returns the longest by a wide margin, and it and the
+  elliptic-blending RSM give the least accurate heat transfer of the set.
+
+  The discriminator is therefore not the eddy-viscosity assumption as such.
+  The $v^{2}$--$f$ and $\varphi$--$f$ models are eddy-viscosity closures and
+  reproduce the data well, while the Reynolds-stress model does not. Keshmiri
+  et al.\ attribute the SST behaviour specifically to that model's
+  shear-stress limiter,
+  \begin{equation*}
+    \mu_t = \frac{\rho\, a_1 k}{\max\!\left(a_1\omega,\; S F_2\right)},
+  \end{equation*}
+  which caps the eddy viscosity wherever the production of $k$ substantially
+  exceeds its dissipation. The limiter is included to prevent the unphysical
+  build-up of eddy viscosity at stagnation points; in the inter-rib cavity it
+  suppresses $\mu_t$ in precisely the region where wall-normal mixing is
+  required to bring the separated shear layer down to the floor. On that
+  reading the over-long bubble is a specific consequence of the SST
+  formulation rather than a general property of two-equation modelling, which
+  is consistent with the spread of results across the models tested by those
+  authors.
+
+  A Reynolds-stress closure (Stress-Omega RSM) was also tested here on the
+  same mesh, started from the converged SST field. It did not recover
+  reattachment. At $y = \SI{0.25}{\milli\meter}$ the maximum forward velocity
+  fell from \SI{0.0785}{\meter\per\second} (SST) to
+  \SI{0.0356}{\meter\per\second} and the peak reverse velocity from $-1.51$
+  to \SI{-0.976}{\meter\per\second}, while the mean floor temperature rose
+  from \SI{326.2}{\kelvin} to approximately \SI{344.5}{\kelvin} --- a
+  near-wall layer more quiescent in both directions, and correspondingly
+  poorer heat transfer rather than better. That solution did not reach a
+  steady fixed point, oscillating within a band of about \SI{1}{\percent},
+  and is reported here as a qualitative result only. This outcome is
+  consistent with, rather than contrary to, the reference study: the
+  elliptic-blending Reynolds-stress model of Keshmiri et al.\ is likewise
+  among the poorer performers on this case. Resolving the stress anisotropy
+  is evidently neither necessary nor sufficient here.
 
   \item[Steady-state assumption --- eliminated.] To test whether a
   vortex-shedding unsteadiness suppressed by the steady solver might shorten
@@ -884,10 +949,10 @@ examined and three eliminated:
   not merely undisturbed but dynamically stable, and the steady assumption
   is not the cause. The test is described in detail below.
 
-  \item[Mesh resolution --- under test.] The grid convergence study of
-  Section~\ref{sec:gci} is the remaining discriminator. That two dissimilar
-  closures and the time-accurate run all return the same length already
-  argues against a mesh origin, but the GCI provides the direct check.
+  \item[Mesh resolution --- eliminated.] The three-level grid convergence
+  study of Section~\ref{sec:gci} shows the reattachment length to be grid
+  independent (GCI$_{\text{fine}} = \SI{0.001}{\percent}$), and it does not
+  approach the experimental band under refinement.
 \end{description}
 
 \begin{table}[htbp]
@@ -979,11 +1044,12 @@ Residual band           & -0.087 & 0.012 & \SI{6}{\milli\second} onwards \\
 \end{tabular}
 \end{table}
 
-The first excursion is a relative departure of about $5$ from the steady
-signal --- five hundred per cent, not the $10^{-8}$ of the unforced run.
+The first excursion is a relative departure of $5.7$ from the steady
+signal --- some six hundred per cent, not the $10^{-8}$ of the unforced run.
 The oscillation has a period of roughly \SI{4.2}{\milli\second}, or $0.85$
-flow-through times, so what is seen is the natural response of the bubble
-and not a numerical artefact of the time step. Each excursion is
+flow-through times; at $\Delta t = \SI{2e-5}{\second}$ this is resolved by
+about $210$ time steps per cycle, so what is seen is the natural response of
+the bubble and not a numerical artefact of the time step. Each excursion is
 approximately an order of magnitude smaller than the one before, and by the
 third the probe has settled into a band of
 $\pm\SI{0.005}{\meter\per\second}$ about
@@ -1007,16 +1073,39 @@ explanation of the over-long bubble in a stronger sense than the unforced
 run alone could support: the two-dimensional field does not merely fail to
 develop shedding, it actively resists being made to shed.
 
-With the measurement definition, the turbulence closure and the steady
-assumption all eliminated, the two-dimensional idealisation remains as the
-governing cause. Rau et al.\ report a markedly three-dimensional flow field
-dominated by turbulence-driven secondary motion of Prandtl's second kind, a
-mechanism that cannot exist in a planar model. They further observe that the
-bubble length varies substantially across the span: for $p/e = 6$ the flow
-reattaches near $Z/\Dh = 0.4$ while remaining separated in the symmetry
-plane. The present model represents the symmetry plane alone and lacks the
-spanwise transport that shortens the bubble --- and, through it, sharpens
-the heat-transfer peak and raises the friction --- in the experiment.
+\paragraph{The role of the two-dimensional idealisation.}
+A planar model of a three-dimensional experiment invites the deviation to be
+blamed on the missing dimension, and the mechanism is real: Rau et al.\
+report a markedly three-dimensional flow field dominated by
+turbulence-driven secondary motion of Prandtl's second kind, which cannot
+exist in a planar model, and observe that the bubble length varies
+substantially across the span --- for $p/e = 6$ the flow reattaches near
+$Z/\Dh = 0.4$ while remaining separated in the symmetry plane. The present
+model represents the symmetry plane alone and carries none of the spanwise
+transport that would shorten the bubble.
+
+That mechanism cannot, however, account for the deviation on its own, and
+the strongest evidence against it comes from computations that are
+themselves two-dimensional. In the study of Keshmiri et
+al.~\cite{keshmiri2016} the $v^{2}$--$f$ model, solved on a 2D domain of
+this same configuration, reproduces the measured Nusselt distribution
+closely and returns a reattachment point where the experiment shows one. Had
+the planar restriction been the governing limitation, no two-dimensional
+computation could have matched the data; dimensionality is held fixed across
+that comparison while the reattachment point appears and disappears with the
+turbulence model. Consistently with this, Keshmiri~\cite{keshmiri2012}
+computed the Rau channel in both two and three dimensions and found that a
+2D domain represents the centre-line flow with reasonable accuracy, and
+those authors adopt a 2D domain in the later study for that reason.
+
+The two-dimensional idealisation is accordingly retained as a secondary
+contribution --- it removes a mechanism that acts in the direction of the
+observed error, and it cannot reproduce the spanwise variation of the
+bubble --- but not as the governing cause. It should also be noted that in
+the reference study every model, two- and three-dimensional considerations
+aside, returns a longer bubble than the measurement; the present
+configuration is demanding for RANS generally, and $k$--$\omega$~SST is the
+extreme case rather than an isolated one.
 
 \paragraph{Pre-registered hypothesis --- not confirmed.}
 The expectation recorded before the results were obtained was that the
@@ -1099,14 +1188,15 @@ operating under limiters, and a fine-grid GCI of \SI{0.71}{\percent}.
 Crucially, the reattachment length does \emph{not} fall towards the
 experimental band of $4.0$--$4.25$ as the mesh is refined; it remains at
 $\Xr/e \approx 7.95$ at every level. The discretisation is therefore
-exonerated. This is the final link of the elimination chain of
-Section~\ref{sec:reatt}: with the measurement definition, the turbulence
-closure, the steady-state assumption and now the mesh resolution all ruled
-out, the over-long separation bubble is confirmed to be a property of the
-two-dimensional model itself.
+exonerated. With the measurement definition, the steady-state assumption and
+now the mesh resolution all ruled out, the over-long separation bubble is
+established as a property of the model rather than of its numerical
+solution, and the attribution to the linear eddy-viscosity closure advanced
+in Section~\ref{sec:reatt} stands as the final link of the chain.
 
 % =====================================================================
 \section{Conclusions}
+\label{sec:concl}
 % =====================================================================
 
 A two-dimensional, streamwise-periodic model of the $p/e = 9$ single-wall
@@ -1137,37 +1227,60 @@ Rau et al. The following was established.
   where it should, but without generating reattachment or the accompanying
   heat-transfer enhancement there.
 
-  \item The cause was isolated by elimination. The measurement definition
+  \item The numerical origins were eliminated. The measurement definition
   (Rau's definition also fails to close the bubble, and does so over a
-  longer interval), the turbulence closure (SST and Realizable
-  $k$--$\varepsilon$ agree to \SI{0.5}{\percent}) and the steady-state
-  assumption (a finite-amplitude disturbance injected into the shear layer
-  decays through a single damped cycle instead of organising into shedding)
-  were each ruled out. The two-dimensional idealisation --- which cannot
-  represent the turbulence-driven secondary flows that shorten the bubble
-  across the span in the real channel --- is identified as the governing
-  cause.
+  longer interval) and the steady-state assumption (a finite-amplitude
+  disturbance injected into the shear layer decays through a single damped
+  cycle instead of organising into shedding) were each ruled out, as was the
+  discretisation: a three-level grid convergence study returns
+  GCI$_{\text{fine}} = \SI{0.001}{\percent}$ on $\Xr/e$ across a fourfold
+  change in element count, with no trend towards the experimental band under
+  refinement. The deviation is therefore a property of the model, not of its
+  numerical solution.
 
-  \item A three-level grid convergence study closes the elimination. The
-  reattachment length is grid independent (GCI$_{\text{fine}} =
-  \SI{0.001}{\percent}$ across a fourfold change in element count) and does
-  not approach the experimental band under refinement, confirming that the
-  deviation is a property of the two-dimensional model and not of the
-  discretisation.
+  \item The deviation is attributed to the turbulence closure, and more
+  specifically to the $k$--$\omega$~SST formulation rather than to
+  two-equation modelling in general. In the identical 2D configuration,
+  Keshmiri et al.~\cite{keshmiri2016} find that every model tested and the
+  experiment exhibit a reattachment point except $k$--$\omega$~SST, and that
+  this closure returns both the longest separation bubble and, with the
+  elliptic-blending Reynolds-stress model, the least accurate heat transfer
+  of the set. Those authors attribute the behaviour to the shear-stress
+  limiter in the SST eddy viscosity, which suppresses $\mu_t$ in the
+  inter-rib cavity where wall-normal mixing is required. A Stress-Omega RSM
+  tested here likewise failed to recover reattachment and returned poorer
+  heat transfer still, consistent with the elliptic-blending RSM being among
+  the weaker performers in the reference study: resolving the stress
+  anisotropy is neither necessary nor sufficient on this case.
+
+  \item The two-dimensional idealisation contributes but is not the
+  governing cause. It removes the spanwise secondary motion that acts to
+  shorten the bubble, so it works in the direction of the observed error.
+  But a $v^{2}$--$f$ computation on a 2D domain of this same configuration
+  reproduces the measured Nusselt distribution closely~\cite{keshmiri2016},
+  which no planar computation could do if the missing dimension were the
+  controlling limitation; and the Rau channel computed in both two and three
+  dimensions agrees reasonably well along the
+  centre-line~\cite{keshmiri2012}.
+
 \end{itemize}
 
-The practical conclusion is that a planar RANS model of this configuration
-reproduces the flow topology and the qualitative trends but should not be
-expected to predict reattachment, heat transfer or pressure loss to
-engineering accuracy; capturing them requires resolving the spanwise
-direction. This defines the natural continuation of the study: a
-three-dimensional solution of the same periodic segment, from which the
-quantitative effect of the secondary flows can be recovered. A second
-extension, deferred from the present scope along with it, is the conjugate
-problem --- a conducting rib coupled to the fluid through a solid--fluid
-interface --- which relaxes the adiabatic idealisation used here and is
-required for any rib material other than the plexiglass of the reference
-experiment.
+The practical conclusion is that the present model reproduces the flow
+topology and the qualitative trends but should not be expected to predict
+reattachment, heat transfer or pressure loss to engineering accuracy in this
+configuration, and that the limitation lies in the choice of closure before
+it lies in the dimensionality. The immediate continuation is therefore a
+change of model rather than of geometry: a $v^{2}$--$f$ or $\varphi$--$f$
+computation on the present 2D mesh, these being the formulations reported to
+perform best on this case, which tests the attribution directly and at a
+fraction of the cost of a three-dimensional study. The three-dimensional
+solution of the same periodic segment remains a natural subsequent step,
+from which the contribution of the secondary flows could be separated from
+that of the closure. A further extension, deferred from the
+present scope, is the conjugate problem --- a conducting rib coupled to the
+fluid through a solid--fluid interface --- which relaxes the adiabatic
+idealisation used here and is required for any rib material other than the
+plexiglass of the reference experiment.
 
 % =====================================================================
 \begin{thebibliography}{9}
@@ -1189,6 +1302,19 @@ F.~R.~Menter,
 \emph{Two-Equation Eddy-Viscosity Turbulence Models for Engineering
 Applications},
 AIAA Journal, 32(8), 1598--1605, 1994.
+
+\bibitem{keshmiri2016}
+A.~Keshmiri, K.~Osman, S.~Benhamadouche, N.~Shokri,
+\emph{Assessment of Advanced RANS Models against Large Eddy Simulation and
+Experimental Data in the Investigation of Ribbed Passages with Passive Heat
+Transfer},
+Numerical Heat Transfer, Part B: Fundamentals, 69(2), 96--110, 2016.
+
+\bibitem{keshmiri2012}
+A.~Keshmiri,
+\emph{Numerical Sensitivity Analysis of 3- and 2-Dimensional Rib-Roughened
+Channels},
+Heat and Mass Transfer, 48, 1257--1271, 2012.
 
 \end{thebibliography}
 
